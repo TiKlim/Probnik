@@ -1,0 +1,94 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		MaxWidth="800"
+		MaxHeight="450"
+        WindowStartupLocation="CenterScreen"
+		x:CompileBindings="False"
+		x:Class="Probnik.MainWindow"
+        Title="Probnik">
+	<Grid ColumnDefinitions="*,Auto,*"
+		  RowDefinitions="Auto,Auto,Auto"
+		  ShowGridLines="False">
+		<!--Кнопка для просмотра корзины-->
+		<Button Grid.Column="1"
+				Grid.Row="2"
+				HorizontalAlignment="Center"
+				Height="30"
+				Width="100"
+				Margin="10"
+				Name="BasketBtn"
+				IsVisible="False">
+			<TextBlock Text="Корзина"
+					   HorizontalAlignment="Center"/>
+		</Button>
+		<!--Шапка-->
+		<Border Grid.Column="1"
+				Grid.Row="0"
+				BorderBrush="Black"
+				BorderThickness="0 0 0 0"
+				Background="WhiteSmoke"
+				Height="58">
+			<Grid ColumnDefinitions="*,*,*,*,*">
+				<TextBlock Grid.Column="0"
+						   Text="Фото:"
+						   Margin="70 0 0 0"/>
+				<TextBlock Grid.Column="1"
+						   Text="Название:"
+						   Margin="70 0 0 0"/>
+				<TextBlock Grid.Column="2"
+						   Text="Описание:"
+						   Margin="70 0 0 0"/>
+				<TextBlock Grid.Column="3"
+						   Text="Производитель:"
+						   Margin="60 0 0 0"/>
+				<TextBlock Grid.Column="4"
+						   Text="Цена:"
+						   Margin="50 0 0 0"/>
+			</Grid>
+		</Border>
+		<!--Листбокс-->
+		<ListBox Name="LBProducts"
+				 Grid.Column="1"
+				 Grid.Row="1"
+				 Height="340"
+				 Width="700">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<Border Background="White"
+							BorderBrush="Black"
+							BorderThickness="1"
+							Height="100"
+							Width="650">
+						<Grid ColumnDefinitions="*,0.9*,1.0*,0.5*,0.3*">
+							<Image Source="{Binding Picture}"
+								   Grid.Column="0"/>
+							<TextBlock Grid.Column="1"
+									   Text="{Binding ProductName}"
+									   VerticalAlignment="Center"/>
+							<TextBlock Grid.Column="2"
+									   Text="{Binding ProductDescription}"
+									   VerticalAlignment="Center"/>
+							<TextBlock Grid.Column="3"
+									   Text="{Binding Manufacture}"
+									   VerticalAlignment="Center"/>
+							<TextBlock Grid.Column="4"
+									   Text="{Binding Price}"
+									   VerticalAlignment="Center"/>
+						</Grid>
+					</Border>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+			<!--Для вызова действия правой кнопкой мыши-->
+			<ListBox.ContextMenu>
+				<ContextMenu>
+					<MenuItem Header="Добавить к заказу"
+							  Name="Right"
+							  Tag="{Binding Id}"/>				
+				</ContextMenu>
+			</ListBox.ContextMenu>
+		</ListBox>
+	</Grid>
+</Window>
